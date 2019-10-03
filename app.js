@@ -1,24 +1,75 @@
-const iURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i="
+const cURL = "https://www.themealdb.com/api/json/v1/1/categories.php"
+const rURL = "https://www.themealdb.com/api/json/v1/1/random.php"
+const sURL = "https://www.themealdb.com/api/json/v1/1/search.php?s="
 
-const button = document.querySelector("button");
-const input = document.querySelector("#input");
+const cbutton = document.querySelector("#cbutton");
+const rbutton = document.querySelector('#rbutton')
+const sbutton = document.querySelector('#sbutton')
+const zinput = document.querySelector("#sinput")
 const list = document.querySelector(".list")
 
-const iRecipe = (recipe) => {
+const rRecipe = (rrecipe) => {
+  console.log(rrecipe.meals)
   list.innerHTML = ''
-  let info = document.createElement('div')
-  info.innerHTML = `<h2>Meal: ${recipe.strMeal}</h2>`
-  list.append(info)
+  rrecipe.meals.map(meal => {
+    let info = document.createElement('div')
+    info.setAttribute('class', 'rdivvy')
+    info.innerHTML = `<div class="rdivvy-child"><h2>${meal.strMeal}</h2> 
+      <p>Region: ${meal.strArea}</p> 
+      <p>Category: ${meal.strCategory}</p></div>
+      <img src=${meal.strMealThumb}>
+      <div class="rdivvy-child2"><p>${meal.strInstructions}</p> 
+      <p><a href="${meal.strYoutube}">Come Cook Along!</a></p></div> `
+    list.append(info)
+  })
 }
 
-
-button.addEventListener('click', async (e) => {
-  e.preventDefault();
-  const meal = input.value
-  const response = await axios.get(`${iURL}${meal}`)
-  iRecipe(response.data);
-  console.log(response.data.meals[1].strMeal)
+const cRecipe = (crecipe) => {
+  console.log(crecipe.categories)
   list.innerHTML = ''
-  let info = document.createElement('div')
-  info.innerHTML = `<h2>Meal: ${response.data.meals[1].strMeal}</h2>`
+  crecipe.categories.map(category => {
+    let info = document.createElement('div')
+    info.setAttribute('class', 'cdivvy')
+    info.innerHTML = `<div class="cdivvy-child"><h2>${category.strCategory}</h2>
+    <p>${category.strCategoryDescription}</p></div>
+    <img src=${category.strCategoryThumb}>`
+    list.append(info)
+  })
+}
+
+const sRecipe = (srecipe) => {
+  console.log(srecipe.meals)
+  list.innerHTML = ''
+  srecipe.meals.map(meal => {
+    let info = document.createElement('div')
+    info.setAttribute('class', 'sdivvy')
+    info.innerHTML = `<div class="sdivvy-child"><h2>${meal.strMeal}</h2>
+    <p>Region: ${meal.strArea}<p> 
+    <p>Category: ${meal.strCategory}</p></div>
+    <img src=${meal.strMealThumb}> <p>${meal.strInstructions}</p>
+    <p><a href="${meal.strYoutube}">Come Cook Along!</a></p></div>`
+    list.append(info)
+  })
+}
+
+cbutton.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const response = await axios.get(`${cURL}`)
+  cRecipe(response.data);
+  console.log(response.data.categories[0].strCategory)
+});
+
+rbutton.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const response = await axios.get(`${rURL}`)
+  rRecipe(response.data);
+  console.log(response.data.meals[0].strMeal)
+});
+
+sbutton.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const meal = sinput.value
+  const response = await axios.get(`${sURL}${meal}`)
+  sRecipe(response.data);
+  console.log(response.data.meals[0].strMeal)
 });

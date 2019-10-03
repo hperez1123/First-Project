@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +8,51 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" href="style.css">
   <script defer src="app.js"></script>
-  <title>Document</title>
-</head>
-<body>
+  <title>Quick Dinner Ideas</title>
 
+  <script src="https://www.youtube.com/iframe_api"></script><br />
+  <script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+  </style>
+</head>
+
+<body>
+  <header data-video="pHSD_SzOBHM" data-autoplay="1" data-loop="1" id="youtube-audio">
+    <h1>Last Minute Skillet</h1>
+  </header>
 
   <div>
-    <form>
-      <input type="text" id="input" placeholder="Search Ingrediant"><br>
-      <button type="submit" value="submit" id="ibutton">search</button>
-    </form>
+    <nav>
+      <form>
+        <button type="submit" value="submit" id="cbutton">Categories</button>
+      </form>
 
-    <section class="list">
+      <form>
+        <button type="submit" value="submit" id="sbutton">Search</button>
+        <input type="text" id="sinput" placeholder="Search Meal">
+      </form>
 
-    </section>
-  </div>
+      <form>
+        <button type="submit" value="submit" id="rbutton">Random</button>
+      </form>
+    </nav>
+    <div id="body">
+      <section class="list">
+        <img src="https://i.imgur.com/o8RJRXi.jpg" title="source: imgur.com" />
+      </section>
+    </div>
 
+    <footer>
+      <p>Don't wait last minute!</p>
+      <p>Created by Hecklefang</p>
+
+      <div id="botBar">
+        <a href="https://www.linkedin.com/in/hector-perez-b4766b160/"><img src="download.png"></img></a>
+        <a href="https://github.com/hperez1123"><img src="GitHub-Mark.png"></img></a>
+      </div>
+    </footer>
 
 </body>
+
 </html>
